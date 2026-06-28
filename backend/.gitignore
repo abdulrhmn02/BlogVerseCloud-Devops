@@ -1,0 +1,39 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+.env.*  # optional: ignore multiple env files like .env.development
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / system files
+.DS_Store
+Thumbs.db
+
+# Build artifacts (if applicable)
+dist/
+build/
+
+# Coverage files from testing
+coverage/
+
+# VSCode settings (optional)
+.vscode/
+
+# PM2 process logs (if using PM2)
+pids/
+*.pid
+*.seed
+
+# Optional debug files
+*.swp
+*.swo
+
+# Jest or test runner cache (if using)
+jest-cache/
