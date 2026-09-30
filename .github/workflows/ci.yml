@@ -106,3 +106,9 @@ jobs:
             576738458757.dkr.ecr.ap-south-2.amazonaws.com/blog-app-backend:${{ github.sha }}
           cache-from: type=gha,scope=backend
           cache-to: type=gha,mode=max,scope=backend
+
+
+      - name: Deploy to Amazon ECS
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          aws ecs update-service --cluster blog-app-cluster --service blog-app-backend-service --force-new-deployment --region ap-south-2 
