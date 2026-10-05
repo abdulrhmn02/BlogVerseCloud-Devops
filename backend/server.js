@@ -16,7 +16,8 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
   'https://learningfullstackdevelopment.onrender.com',
-  'http://blog-app-frontend-site-2026.s3-website.ap-south-2.amazonaws.com'
+  'http://blog-app-frontend-site-2026.s3-website.ap-south-2.amazonaws.com',
+  'http://blog-app-frontend-site-2026.s3-website.ap-south-2.amazonaws.com/'
 ];
 
 app.use(
