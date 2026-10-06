@@ -112,3 +112,47 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           aws ecs update-service --cluster blog-app-cluster --service blog-app-backend-service --force-new-deployment --region ap-south-2 
+
+                # --------------------------------------------------
+      # Frontend Deployment
+      # --------------------------------------------------
+
+      - name: Set up Node.js
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Frontend Dependencies
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: npm ci
+
+      - name: Get Current ALB URL
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        id: alb
+        run: |
+          ALB_DNS=$(aws elbv2 describe-load-balancers \
+            --names blog-app-alb \
+            --query 'LoadBalancers[0].DNSName' \
+            --output text \
+            --region ap-south-2)
+
+          echo "Current ALB DNS: $ALB_DNS"
+
+          echo "api_url=http://${ALB_DNS}" >> "$GITHUB_OUTPUT"
+
+      - name: Build Frontend
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          VITE_API_URL: ${{ steps.alb.outputs.api_url }}
+        run: |
+          echo "Building frontend with API URL: $VITE_API_URL"
+          npm run build
+
+      - name: Deploy Frontend to S3
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          aws s3 sync dist/ s3://blog-app-frontend-site-2026 \
+            --delete \
+            --region ap-south-2
