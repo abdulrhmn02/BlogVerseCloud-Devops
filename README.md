@@ -58,9 +58,9 @@ The goal of this project is to demonstrate practical experience with containeriz
 | --------------------------------------- | ----------- |
 | Repository Setup                        | ✅ Completed |
 | Containerization (Docker)               | ✅ Completed |
-| Continuous Integration (GitHub Actions) | ⏳ Planned   |
-| AWS Deployment                          | ⏳ Planned   |
-| Infrastructure as Code (Terraform)      | ⏳ Planned   |
+| Continuous Integration (GitHub Actions) | ✅ Completed |
+| AWS Deployment                          | ✅ Completed  |
+| Infrastructure as Code (Terraform)      | ✅ Completed  |
 | Monitoring (Prometheus & Grafana)       | ⏳ Planned   |
 | Kubernetes Deployment                   | ⏳ Planned   |
 | Production Improvements                 | ⏳ Planned   |
