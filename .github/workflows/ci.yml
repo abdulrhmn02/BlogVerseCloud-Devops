@@ -62,6 +62,9 @@ name: CI/CD Pipeline to AWS ECR & ECS
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
   pull_request:
     branches: [ "main" ]
 
